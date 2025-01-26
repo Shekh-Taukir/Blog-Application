@@ -1,0 +1,83 @@
+/* General Styles */
+body {
+    background-color: #121212;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Signup Form Container */
+.login-container {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Form Title */
+.login-container h1 {
+    color: #ffd700;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Two-Column Layout */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/* Full-Width Fields */
+.form-grid .full-width {
+    grid-column: span 2;
+}
+
+/* Input Fields */
+.login-container input[type="text"],
+.login-container input[type="password"],
+.login-container input[type="email"],
+.login-container input[type="date"] {
+    background-color: #121212;
+    color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Buttons */
+.login-container button {
+    background-color: #ffd700;
+    color: #121212;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+}
+
+.login-container button:hover {
+    background-color: #e5c700;
+}
+
+/* Links */
+.login-container a {
+    color: #ffd700;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}

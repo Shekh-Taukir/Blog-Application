@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark & Gold Themed Popup</title>
+    <style>
+        /* Style for the modal's background overlay */
+        .modal-overlay {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            /* Dark translucent background */
+            z-index: 1000;
+        }
+
+        /* Style for the modal content */
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1e1e1e;
+            /* Dark background */
+            color: gold;
+            /* Gold text color */
+            padding: 30px;
+            border-radius: 15px;
+            width: 400px;
+            box-shadow: 0 6px 15px rgba(255, 215, 0, 0.2);
+            /* Subtle gold glow */
+            border: 2px solid gold;
+            /* Gold border */
+            z-index: 1001;
+        }
+
+        /* Close button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: gold;
+            cursor: pointer;
+        }
+
+        /* Form labels and inputs */
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid gold;
+            border-radius: 5px;
+            background: #333;
+            /* Dark input background */
+            color: gold;
+            /* Gold text color */
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ffda44;
+            /* Bright gold when focused */
+        }
+
+        button {
+            background: gold;
+            color: black;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #ffda44;
+            /* Brighter gold on hover */
+        }
+
+        /* Error message */
+        .error-message {
+            color: red;
+            font-size: 14px;
+            display: none;
+            /* Hidden by default */
+        }
+
+        /* Header and additional content */
+        .modal-header {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .modal-body {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main content -->
+    <h1 style="color: gold; text-align: center; margin-top: 50px;">Welcome to My Dark & Gold Themed Website</h1>
+    <button id="loginButton"
+        style="display: block; margin: 20px auto; background: gold; color: black; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+        Login
+    </button>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-btn" id="closeModal">✖</button>
+            <div class="modal-header">User Login</div>
+            <div class="modal-body">
+                <p>Welcome! Please enter your username and password to access the exclusive content.</p>
+            </div>
+            <form id="loginForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <p class="error-message" id="errorMessage">Both fields are required!</p>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Get references to modal and buttons
+        const modal = document.getElementById("loginModal");
+        const loginButton = document.getElementById("loginButton");
+        const closeModal = document.getElementById("closeModal");
+        const loginForm = document.getElementById("loginForm");
+        const errorMessage = document.getElementById("errorMessage");
+
+        // Show modal when "Login" button is clicked
+        loginButton.addEventListener("click", () => {
+            modal.style.display = "block";
+        });
+
+        // Close modal when "X" button is clicked
+        closeModal.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        // Validate form input and close modal only if valid
+        loginForm.addEventListener("submit", (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            // Check if both fields are filled
+            if (username === "" || password === "") {
+                errorMessage.style.display = "block"; // Show error message
+            } else {
+                errorMessage.style.display = "none"; // Hide error message
+                alert(`Welcome, ${username}!`); // Simulate successful response
+                modal.style.display = "none"; // Close the modal
+            }
+        });
+
+        // Prevent modal from closing when clicking outside the modal content
+        window.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                errorMessage.style.display = "block";
+                errorMessage.textContent = "Please complete the form before closing.";
+            }
+        });
+    </script>
+</body>
+
+</html>

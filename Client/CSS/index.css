@@ -1,0 +1,42 @@
+/* General Styles */
+body {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #1c1c1c;
+}
+
+.navbar a {
+    color: #ffffff;
+}
+
+/* Blog Cards */
+.blog-card {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.blog-title {
+    color: #ffd700;
+}
+
+.blog-description {
+    color: #dcdcdc;
+}
+
+.additional-nav-item a{
+    color: #ffd700;
+}
+
+.additional-nav-item a:hover {
+    color: darkorange;
+    font-weight: bold;
+}
+

@@ -1,0 +1,90 @@
+/* General Styles */
+body {
+    background-color: #121212;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Login Form Container */
+.login-container {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Form Title */
+.login-container h1 {
+    color: #ffd700;
+    margin-bottom: 20px;
+}
+
+/* Input Fields */
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    background-color: #121212;
+    color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+/* Buttons */
+.login-container button {
+    background-color: #ffd700;
+    color: #121212;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+}
+
+.login-container button:hover {
+    background-color: #e5c700;
+}
+
+/* Links */
+.login-container a {
+    color: #ffd700;
+    text-decoration: none;
+    display: block;
+    margin-top: 15px;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+
+/* Input Fields (General) */
+.login-container input[type="text"],
+.login-container input[type="password"],
+.login-container input[type="email"],
+.login-container input[type="date"] {
+    background-color: #121212;
+    color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    appearance: none; /* Ensures consistent styling across browsers */
+}
+
+/* Remove special styles for date fields */
+.login-container input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Inverts colors to match the dark theme */
+}
