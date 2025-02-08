@@ -1,0 +1,108 @@
+/* Style for the modal's background overlay */
+#login-modal .modal-overlay {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    /* Dark translucent background */
+    z-index: 1000;
+}
+
+/* Style for the modal content */
+#login-modal .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1e1e1e;
+    /* Dark background */
+    color: gold;
+    /* Gold text color */
+    padding: 30px;
+    border-radius: 15px;
+    width: 400px;
+    box-shadow: 0 6px 15px rgba(255, 215, 0, 0.2);
+    /* Subtle gold glow */
+    border: 2px solid gold;
+    /* Gold border */
+    z-index: 1001;
+}
+
+/* Close button */
+#login-modal .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: gold;
+    cursor: pointer;
+}
+
+/* Form labels and inputs */
+#login-modal label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+#login-modal input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid gold;
+    border-radius: 5px;
+    background: #333;
+    /* Dark input background */
+    color: gold;
+    /* Gold text color */
+}
+
+#login-modal input:focus {
+    outline: none;
+    border-color: #ffda44;
+    /* Bright gold when focused */
+}
+
+#login-modal button {
+    background: gold;
+    color: black;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#login-modal button:hover {
+    background: #ffda44;
+    /* Brighter gold on hover */
+}
+
+/* Error message */
+#login-modal .error-message {
+    color: red;
+    font-size: 14px;
+    display: none;
+    /* Hidden by default */
+}
+
+/* Header and additional content */
+#login-modal .modal-header {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#login-modal .modal-body {
+    font-size: 14px;
+    margin-bottom: 20px;
+}

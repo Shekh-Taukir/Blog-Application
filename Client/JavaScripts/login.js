@@ -7,7 +7,6 @@ document.getElementById("login_form").addEventListener("submit", async function 
     let ls_response;
 
     try {
-        console.log(data)
         const response = await fetch(main_api + users_api_point + "login_user", {
             method: "POST",
             headers: {

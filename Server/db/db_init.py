@@ -4,6 +4,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.ext.declarative import declarative_base
 
+# from routers.auth import of_get_current_user
+
 
 db_url = "postgresql://postgres:admin@localhost:5432/full_stack_project_db"
 
@@ -28,3 +30,4 @@ def of_get_db():
 
 
 db_dependency = Annotated[Session, Depends(of_get_db)]
+# user_dependency = Annotated[dict, Depends(of_get_current_user)]

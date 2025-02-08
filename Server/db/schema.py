@@ -19,4 +19,9 @@ class LoginModel(BaseModel):
 class BlogsModel(BaseModel):
     blogs_title: str
     blogs_description: str
-    created_by_user_id: int
+    # created_by_user_id: int
+
+
+class TokenModel(BaseModel):
+    access_token: str
+    token_type: str

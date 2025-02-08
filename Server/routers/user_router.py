@@ -1,36 +1,34 @@
-from fastapi import APIRouter
-from db.schema import UserModel, LoginModel
-from db.models import User
-from db.db_init import db_dependency
-from sqlalchemy import and_
-from typing import Optional
+from fastapi import APIRouter, HTTPException, Depends
+from typing import Annotated
+from starlette import status
 
-user_router = APIRouter(
-    prefix="/user",
-    tags=["User"],
+from Server.db.schema import UserModel, LoginModel
+from Server.db.models import User
+from Server.db.db_init import db_dependency
+
+from .router_base import of_result_message, of_init_router
+from .auth import bcrypt_context, auth_router, of_authenticate_user, of_get_current_user
+
+ls_api_prefix = "/user"
+lt_api_tags = ["User"]
+
+user_router = of_init_router(
+    ls_api_prefix,
+    lt_api_tags,
 )
 
-
-def of_result_message(
-    ab_success: bool,
-    as_message: Optional[str] = None,
-    alt_result=None,
-):
-    ld_return = {}
-
-    ld_return["Success"] = ab_success
-
-    if as_message:
-        ld_return["Message"] = as_message
-
-    if alt_result:
-        ld_return["result"] = alt_result
-        ld_return["no_of_entries"] = len(alt_result)
-
-    return ld_return
+if user_router is None:
+    user_router = APIRouter(
+        prefix=ls_api_prefix,
+        tags=[lt_api_tags[0]],
+    )
 
 
-@user_router.post("/add_user")
+user_dependency = Annotated[dict, Depends(of_get_current_user)]
+
+
+# @user_router.post("/add_user")
+@auth_router.post("/add_user", status_code=status.HTTP_201_CREATED)
 async def of_add_user(user: UserModel, db: db_dependency):
     if not user:
         return of_result_message(False, "Not valid input user data")
@@ -51,14 +49,14 @@ async def of_add_user(user: UserModel, db: db_dependency):
         bdate=user.bdate,
         email=user.email,
         user_id=user.user_id,
-        password=user.password,
+        password=bcrypt_context.hash(user.password),
     )
 
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
 
-    return of_result_message(True, None, new_user)
+    return of_result_message(True, None, new_user, True)
 
 
 @user_router.post("/login_user")
@@ -70,19 +68,15 @@ async def of_login_user(login_user: LoginModel, db: db_dependency):
     if len(as_user_id) == 0 or len(as_pass) == 0:
         return of_result_message(False, "User_id or Password is not valid.")
 
-    db_user = (
-        db.query(User)
-        .filter(and_(User.user_id == as_user_id, User.password == as_pass))
-        .first()
-    )
+    li_result = of_authenticate_user(as_user_id, as_pass, db).get("user_tran_id")
 
-    if db_user is None:
-        return of_result_message(False)
+    if li_result < 0:  # type:ignore
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Could not validate user.",
+        )
 
-    if db_user:
-        return of_result_message(True, None, {"login_user": db_user.tran_id})
-    else:
-        return of_result_message(False)
+    return of_result_message(True, None, {"login_user": li_result})
 
 
 @user_router.get("/get_user")
@@ -92,7 +86,8 @@ async def of_get_user(user_tran_id: int, db: db_dependency):
 
     db_user = db.query(User).filter(User.tran_id == user_tran_id).first()
 
-    if db_user is None:
+    print(db_user)
+    if db_user is None or not db_user:
         return of_result_message(False, "user not found as per id.")
 
     return of_result_message(True, None, db_user)
@@ -136,3 +131,11 @@ async def of_delete_user(user_tran_id: int, db: db_dependency):
     db.commit()
 
     return of_result_message(True, "User is deleted of provided user_id")
+
+
+@user_router.get("/get_user1")
+async def of_get_user_auth(user: user_dependency):
+    if user is None:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+
+    return of_result_message(True, "", {"user": user})

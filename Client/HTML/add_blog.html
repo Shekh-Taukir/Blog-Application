@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Blog</title>
+    <!-- main css -->
+    <link rel="stylesheet" href="../CSS/add_blog.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Add a New Blog</h2>
+        <form id="add_blog_form">
+            <input type="text" id="blogs_title" name="blogs_title" placeholder="Blog Title" required>
+            <textarea rows="5" id="blogs_description" name="blogs_description" placeholder="Write your content here..."
+                required></textarea>
+            <button type="submit">Publish</button>
+            <button onclick="of_return_to_index()">Go to Main Page</button>
+        </form>
+    </div>
+    <script src="../JavaScripts/base.js"></script>
+    <script src="../JavaScripts/add_blog.js"></script>
+</body>
+
+</html>

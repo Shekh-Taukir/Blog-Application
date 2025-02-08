@@ -1,4 +1,4 @@
-from db.db_init import Base
+from Server.db.db_init import Base
 from sqlalchemy import Integer, String, Column, ForeignKey, Date, DateTime, Text
 from datetime import datetime, timezone
 
@@ -30,4 +30,6 @@ class Blogs(Base):
         default=lambda: datetime.now(timezone.utc),
         onupdate=lambda: datetime.now(timezone.utc),
     )
-    created_by_user_id = Column(Integer, ForeignKey("user_mst.tran_id"))
+    created_by_user_id = Column(
+        Integer, ForeignKey("user_mst.tran_id", ondelete="CASCADE")
+    )
