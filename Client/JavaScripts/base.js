@@ -5,3 +5,7 @@ const blogs_api_point = "blogs/"
 function of_redirectPage(as_page) {
     window.location.href = as_page
 }
+
+function of_return_to_index() {
+    of_redirectPage("index.html");
+}
